@@ -4,17 +4,17 @@ USE `boostr`;
 
 -- Create tables
 CREATE TABLE IF NOT EXISTS `article` (
-  `id`        int(11)         NOT NULL  AUTO_INCREMENT,
-  `category`  varchar(45)     NOT NULL,
-  `url`       varchar(45)     NOT NULL,
+  `id`        INT(11)         NOT NULL  AUTO_INCREMENT,
+  `category`  VARCHAR(45)     NOT NULL,
+  `url`       VARCHAR(45)     NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `category` (
-  `id`        int(11)         NOT NULL      AUTO_INCREMENT,
-  `name`      varchar(45)     DEFAULT NULL,
-  `value`     decimal(32,0)   DEFAULT NULL,
-  `user`      int(11)         DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `category_data` (
+  `id`        INT(11)         NOT NULL      AUTO_INCREMENT,
+  `name`      VARCHAR(45)     DEFAULT NULL,
+  `value`     FLOAT           DEFAULT NULL,
+  `user`      INT(11)         DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_user`
     FOREIGN KEY (`id`)
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `uuid`      int(11)   NOT NULL,
+  `uuid`      INT(11)   NOT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
