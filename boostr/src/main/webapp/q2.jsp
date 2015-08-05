@@ -52,6 +52,10 @@ $( document ).ready(function() {
 			);
 	
 	$( "#slider-value" ).html(  $('#slider').slider('value') );
+	
+	
+	
+	
 });
 
 
@@ -59,11 +63,7 @@ $( document ).ready(function() {
 </script>
 </head>
 
-<%
 
-
-
-%>
 <body>
 <div class="container">
     <div class="col-md-8 col-md-offset-2 clearfix">
