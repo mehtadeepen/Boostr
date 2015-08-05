@@ -43,7 +43,7 @@ public class ServerMain {
 
             List<Article> articles = new ArrayList<>();
 
-            for( int i = 0; i < 2; i++ ) {
+            for( int i = 0; i < Math.min( 2, sortedPrefs.size() ); i++ ) {
                 articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
             }
 

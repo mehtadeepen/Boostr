@@ -15,11 +15,12 @@ import com.mysema.query.sql.dml.SQLUpdateClause;
 import com.mysema.query.sql.mysql.MySQLQuery;
 
 public class UserStore {
-	private final String connectionLocation = "jdbc:sql://localhost:3306/boostr";
+	private final String connectionLocation = "jdbc:mysql://localhost:3306/boostr";
 	private final String connectionUser = "root";
 
 	public User getUser(String uuid) {
 		try {
+			Class.forName( "com.mysql.jdbc.Driver" );
 			QDbCategoryData qcategorydata = new QDbCategoryData( "cd" );
 			MySQLQuery query = new MySQLQuery( DriverManager.getConnection( connectionLocation, connectionUser, "" ) );
 
@@ -33,7 +34,7 @@ public class UserStore {
 			}
 
 			return new User( uuid, userData );
-		} catch( SQLException e ) {
+		} catch( SQLException | ClassNotFoundException e ) {
 			e.printStackTrace();
 		}
 		return null;
@@ -41,6 +42,7 @@ public class UserStore {
 
 	public void updateUserPrefs( String uuid, Map<Category, Float> newPrefs ) {
 		try {
+			Class.forName( "com.mysql.jdbc.Driver" );
 			QDbCategoryData qcategorydata = new QDbCategoryData( "cd" );
 			Connection connection = DriverManager.getConnection( connectionLocation, connectionUser, "" );
 			MySQLQuery query = new MySQLQuery( connection );
@@ -56,7 +58,7 @@ public class UserStore {
 					  .set( qcategorydata.value, oldPrefs.getValue() + newPrefs.get( c ) )
 					  .execute();
 			}
-		} catch( SQLException e ) {
+		} catch( SQLException | ClassNotFoundException e ) {
 			e.printStackTrace();
 		}
 	}
