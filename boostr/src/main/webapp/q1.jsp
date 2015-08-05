@@ -35,7 +35,7 @@ function setValues() {
 	var cookie = docCookies.getItem( "user_id" );
 	$('#uid').val(cookie);
 	
-	alert($('#val').val());
+	//alert($('#val').val());
 	
 	
 	
