@@ -4,6 +4,7 @@ import com.google.common.base.Functions;
 import com.google.common.collect.Ordering;
 import com.intuit.honeybadgers.boostr.models.Article;
 import com.intuit.honeybadgers.boostr.models.Category;
+import com.intuit.honeybadgers.boostr.models.User;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -31,7 +32,7 @@ public class ServerMain {
     @Produces( MediaType.APPLICATION_JSON )
     public List<Article> getArticles( @QueryParam( "uuid" ) String uuid ) {
         // Return articles for a specific user
-        User user = userStore.getUserByUUID( uuid );
+        User user = userStore.getUser( uuid );
         Map<Category, Double> userPrefs = user.getInterests();
 
         List<Category> sortedPrefs = new ArrayList<>();
