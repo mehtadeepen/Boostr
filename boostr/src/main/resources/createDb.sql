@@ -7,7 +7,7 @@ USE `boostr`;
 CREATE TABLE IF NOT EXISTS `db_article` (
   `id`        INT(11)         NOT NULL  AUTO_INCREMENT,
   `category`  VARCHAR(45)     NOT NULL,
-  `title`     VARCHAR(30)     NOT NULL,
+  `title`     VARCHAR(55)     NOT NULL,
   `url`       VARCHAR(150)    NOT NULL,
   `author`    VARCHAR(45)     NOT NULL,
   PRIMARY KEY (`id`)

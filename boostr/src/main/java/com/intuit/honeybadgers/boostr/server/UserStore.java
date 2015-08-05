@@ -53,6 +53,8 @@ public class UserStore {
 											   .limit( 1 )
 											   .uniqueResult( qcategorydata );
 
+				if( )
+
 				SQLUpdateClause update = new SQLUpdateClause( connection, new MySQLTemplates(), qcategorydata );
 				update.where( qcategorydata.user.eq( uuid ).and( qcategorydata.name.eq( c.name() ) ) )
 					  .set( qcategorydata.value, oldPrefs.getValue() + newPrefs.get( c ) )
