@@ -25,6 +25,8 @@ public class QDbArticle extends com.mysema.query.sql.RelationalPathBase<DbArticl
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
+    public final StringPath title = createString("title");
+
     public final StringPath url = createString("url");
 
     public final com.mysema.query.sql.PrimaryKey<DbArticle> primary = createPrimaryKey(id);

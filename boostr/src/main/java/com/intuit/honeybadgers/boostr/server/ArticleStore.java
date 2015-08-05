@@ -35,7 +35,7 @@ public class ArticleStore {
             List<Article> returnedArticles = new ArrayList<>();
 
             for( DbArticle a : dbArticles ) {
-                returnedArticles.add( new Article( new URI( a.getUrl() ), a.getAuthor(), Category.valueOf( a.getCategory() ) ) );
+                returnedArticles.add( new Article( new URI( a.getUrl() ), a.getAuthor(), Category.valueOf( a.getCategory() ), a.getTitle() ) );
             }
 
             return returnedArticles;

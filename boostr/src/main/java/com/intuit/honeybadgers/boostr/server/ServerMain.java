@@ -43,8 +43,12 @@ public class ServerMain {
 
             List<Article> articles = new ArrayList<>();
 
-            for( int i = 0; i < Math.min( 2, sortedPrefs.size() ); i++ ) {
+            for( int i = 0; i < Math.min( 3, sortedPrefs.size() ); i++ ) {
                 articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
+            }
+
+            if( articles.size() == 0 ) {
+                articles.addAll( articleStore.getArticlesByCategory( Category.Interest ) );
             }
 
             return articles;
