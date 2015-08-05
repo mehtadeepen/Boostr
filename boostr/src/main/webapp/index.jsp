@@ -20,7 +20,7 @@
            <img src='/boostr/img/logo.png'/>
         </div>
         <div class='text-center row'>
-            <a class='btn btn-default' href='#' role='button' id='start_btn'> Get Started </a>
+            <a class='btn btn-default' href='/boostr/q1.jsp' role='button' id='start_btn'> Get Started </a>
         </div>
     </div>
     <script type='text/javascript'>

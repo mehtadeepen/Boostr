@@ -7,23 +7,27 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/cokies/js"></script>
+    <script src="js/cookies.js"></script>
     <script type="text/javascript">
 function fillArticleList( data, status ) {
+    console.log(data)
     var articleList = document.getElementById( "articlesList" );
-    for( var article : data ) {
-        var newArticleElement = document.createElement( "li" );
+    for( var i=0; i < data.length; i++ ) {
+        $('#articleList').append($('<li></li>'));
         
     }
 }
 
 function loadPersonalizedArticles() {
+    console.log("TEST");
     var cookie = docCookies.getItem( "user_id" );
-    $.get( "/articles?uuid=" +cookie, fillArticleList );
+    $.get( "server/articles?uuid=" +cookie, fillArticleList );
 }
+
+$(document).ready(loadPersonalizedArticles);
     </script>
 </head>
-<body onload="loadPersonalizedArticles()">
+<body >
 <!-- Some sort of header maybe -->
 
 <div class="jumbotron">
