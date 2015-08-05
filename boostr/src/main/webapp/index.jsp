@@ -47,9 +47,11 @@
             </p>
         </div>
         <div class='text-center row'>
-           <img src='/boostr/img/logo.png'/>
+           <img style="display: block;
+    margin-left: auto;
+    margin-right: auto;" src='/boostr/img/logo.png'/>
         </div>
-        <div class='text-center row'>
+        <div align="center" class='text-center row' style="padding: 20px;">
             <a class='btn btn-default' href='q1.jsp' role='button' id='start_btn'> Get Started </a>
         </div>
     </div>

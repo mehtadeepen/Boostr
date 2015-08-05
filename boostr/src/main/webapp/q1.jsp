@@ -65,6 +65,28 @@ $( document ).ready(function() {
 </script>
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" style="
+    height: 30px;
+    width: 30px;
+" src="/boostr/img/logo.png">
+      </a>
+      <a class="navbar-brand" href="#">
+       Boostr
+      </a>
+    </div>
+  </div>
+</nav>
+
+    <div class='container' style="padding: 50px ;">
+        <div class='text-center row'>
+            <h1> Personalized Question </h1>
+            
+        </div>
+        </div>
 <div class="container">
     <div class="col-md-8 col-md-offset-2 clearfix">
         <div class="">
