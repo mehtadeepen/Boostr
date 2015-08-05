@@ -27,6 +27,17 @@
 </style>
 <script type="text/javascript">
 
+function setValues() {
+	
+	var sliderValue = $('#slider').slider('value');
+	$('#val').val(sliderValue);
+	
+	alert($('#val').val());
+	
+	$('#q1').submit();
+	
+}
+
 $( document ).ready(function() {
 	$("#slider").slider(
 			{
@@ -50,20 +61,20 @@ $( document ).ready(function() {
 <body>
 <div class="container">
     <div class="col-md-8 col-md-offset-2 clearfix">
-        <div class="well">
+        <div class="">
         <h3>
         Question 1 of 8
         </h3>
             <p class="text-justify text-center"> You're going out to
              dinner with friend. 
              Do you ... ? </p>
-        </div>
+       
 <div id="slider">
     <div class="pull-right">
-        <p> I feel lost </p>
+        <p> Pick the place  </p>
     </div>
     <div class="pull-left">
-        <p> I feel horrible </p>
+        <p> Let someone else decide </p>
     </div>
     <br/>
     <div align="center">
@@ -72,6 +83,15 @@ $( document ).ready(function() {
        
 </div>
     </div>
+    <br/>
+    <form id="q1" name="q1" action="q2.jsp" method="post">
+    <input type="hidden" name="uid" id="uid" value=""></input>
+    <input type="hidden" name="val" id="val" value=""></input>
+    <input type="hidden" name="que1" id="que1" value=""></input>
+    <br>
+    <input type="button" value="Next" class="btn btn-warning" onclick="setValues();"></input>
+    </form>
+     </div>
     </div>
 </body>
 </html>

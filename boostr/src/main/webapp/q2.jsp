@@ -5,8 +5,93 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>
+.ui-slider { margin-top: 20px }
+.pull-left {float : left !important;
+             margin-left : 10px;
+             margin-top: 20px;}
+.pull-right {float : right !important;
+             margin-right : 10px;
+             margin-top: 20px;}
+</style>
+<script type="text/javascript">
+
+function setValues() {
+	
+	var sliderValue = $('#slider').slider('value');
+	$('#val').val(sliderValue);
+	
+	alert($('#val').val());
+	
+	$('#q2').submit();
+	
+}
+
+$( document ).ready(function() {
+	$("#slider").slider(
+			{
+			            value:50,
+			            min: 0,
+			            max: 100,
+			            step: 1,
+			            slide: function( event, ui ) {
+			                $( "#slider-value" ).html( ui.value );
+			            }
+			}
+			);
+	
+	$( "#slider-value" ).html(  $('#slider').slider('value') );
+});
+
+
+
+</script>
 </head>
 <body>
-
+<div class="container">
+    <div class="col-md-8 col-md-offset-2 clearfix">
+        <div class="">
+        <h3>
+        Question 2 of 8
+        </h3>
+            <p class="text-justify text-center"> Your wallet gets stolen while
+            you're out on the town.
+             Do you ... ? </p>
+       
+<div id="slider">
+    <div class="pull-right">
+        <p> Call the police </p>
+    </div>
+    <div class="pull-left">
+        <p> Chase after the crook </p>
+    </div>
+    <br/>
+    <div align="center">
+     <span id="slider-value"></span>
+    </div>
+       
+</div>
+    </div>
+    <br/>
+    <form id="q2" name="q2" action="q3.jsp" method="post">
+    <input type="hidden" name="uid" id="uid" value=""></input>
+    <input type="hidden" name="val" id="val" value=""></input>
+    <input type="hidden" name="que1" id="que1" value=""></input>
+    <br>
+    <input type="button" value="Next" class="btn btn-warning" onclick="setValues();"></input>
+    </form>
+     </div>
+    </div>
 </body>
 </html>
