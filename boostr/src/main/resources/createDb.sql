@@ -1,9 +1,9 @@
 -- Create DB
+DROP DATABASE IF EXISTS `boostr`;
 CREATE DATABASE IF NOT EXISTS `boostr` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `boostr`;
 
 -- Create tables
-DROP TABLE `db_article`;
 CREATE TABLE IF NOT EXISTS `db_article` (
   `id`        INT(11)         NOT NULL  AUTO_INCREMENT,
   `category`  VARCHAR(45)     NOT NULL,
@@ -12,30 +12,28 @@ CREATE TABLE IF NOT EXISTS `db_article` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE `db_category_data`;
+CREATE TABLE IF NOT EXISTS `db_user` (
+  `uuid`      VARCHAR(30)     NOT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS `db_category_data` (
-  `id`        INT(11)         NOT NULL      AUTO_INCREMENT,
-  `name`      VARCHAR(45)     DEFAULT NULL,
-  `value`     FLOAT           DEFAULT NULL,
-  `user`      INT(11)         DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  `name`      VARCHAR(45)     NOT NULL,
+  `value`     DOUBLE          NOT NULL,
+  `user`      VARCHAR(30)     NOT NULL,
+  PRIMARY KEY (`name`, `user`),
   CONSTRAINT `fk_user`
-    FOREIGN KEY (`id`)
-    REFERENCES `db_user` (`uuid`)
+  FOREIGN KEY (`user`)
+  REFERENCES `boostr`.`db_user` (`uuid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE `db_user`;
-CREATE TABLE IF NOT EXISTS `db_user` (
-  `uuid`      INT(11)   NOT NULL,
-  PRIMARY KEY (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Create default data
 LOCK TABLES `db_article` WRITE;
 INSERT INTO `db_article`
-  (`category`,    `author`, `url`)
+(`category`,    `author`, `url`)
 VALUES
   ('Interest',    'Burton G. Malkiel',          'http://www.econlib.org/library/Enc/InterestRates.html'),
   ('Interest',    'Investopedia',               'http://www.investopedia.com/terms/i/interestrate.asp'),

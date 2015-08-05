@@ -4,17 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-	private Map<Category, Double> interests;
+	private String uuid;
+	private Map<Category, Float> interests;
 
 	public User() {
-		this.interests = new HashMap<Category, Double>();
+		this.interests = new HashMap<Category, Float>();
 	}
-	
-	public Map<Category, Double> getInterests() {
+
+	public User( String uuid, Map<Category, Float> userData ) {
+		this.uuid = uuid;
+		interests = userData;
+	}
+
+	public Map<Category, Float> getInterests() {
 		return interests;
 	}
 	
-	public void incrementCategories(Map<Category, Double> toInc) {
+	public void incrementCategories(Map<Category, Float> toInc) {
 		for (Category key : toInc.keySet()) {
 			if(interests.containsKey(key)) {
 				interests.put(key, interests.get(key) + toInc.get(key));

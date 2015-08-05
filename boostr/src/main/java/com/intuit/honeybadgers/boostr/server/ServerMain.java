@@ -34,7 +34,7 @@ public class ServerMain {
         } else {
             // Return articles for a specific user
             User user = userStore.getUser( uuid );
-            Map<Category, Double> userPrefs = user.getInterests();
+            Map<Category, Float> userPrefs = user.getInterests();
 
             List<Category> sortedPrefs = new ArrayList<>();
             sortedPrefs = Ordering.natural().onResultOf( Functions.forMap( userPrefs ) ).sortedCopy( sortedPrefs );
@@ -52,7 +52,7 @@ public class ServerMain {
     @POST
     @Path( "answer" )
     @Consumes( MediaType.APPLICATION_JSON )
-    public void setAnswers( @QueryParam( "uuid" ) String uuid, Map<Category, Double> responses ) {
-        //userStore.getUser( uuid ).getInterests()
+    public void setAnswers( @QueryParam( "uuid" ) String uuid, Map<Category, Float> responses ) {
+        userStore.updateUserPrefs( uuid, responses );
     }
 }
