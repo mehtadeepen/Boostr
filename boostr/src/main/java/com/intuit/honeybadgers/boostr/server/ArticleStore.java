@@ -1,6 +1,10 @@
 package com.intuit.honeybadgers.boostr.server;
 
+import com.intuit.honeybadgers.boostr.models.Article;
+import com.intuit.honeybadgers.boostr.models.Category;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ddubois

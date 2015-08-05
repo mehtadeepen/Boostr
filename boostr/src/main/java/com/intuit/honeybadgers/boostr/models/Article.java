@@ -9,4 +9,8 @@ public class Article {
 	String author;
 	/** What category this falls under */
 	Category category;
+
+	public Category getCategory() {
+		return  category;
+	}
 }
