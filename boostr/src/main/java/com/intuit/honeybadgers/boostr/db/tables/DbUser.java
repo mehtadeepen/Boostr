@@ -3,18 +3,18 @@ package com.intuit.honeybadgers.boostr.db.tables;
 import javax.annotation.Generated;
 
 /**
- * User is a Querydsl bean type
+ * DbUser is a Querydsl bean type
  */
 @Generated("com.mysema.query.codegen.BeanSerializer")
-public class User {
+public class DbUser {
 
-    private Integer uuid;
+    private String uuid;
 
-    public Integer getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(Integer uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

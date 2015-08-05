@@ -3,10 +3,10 @@ package com.intuit.honeybadgers.boostr.db.tables;
 import javax.annotation.Generated;
 
 /**
- * Article is a Querydsl bean type
+ * DbArticle is a Querydsl bean type
  */
 @Generated("com.mysema.query.codegen.BeanSerializer")
-public class Article {
+public class DbArticle {
 
     private String category;
 

@@ -3,26 +3,16 @@ package com.intuit.honeybadgers.boostr.db.tables;
 import javax.annotation.Generated;
 
 /**
- * Category is a Querydsl bean type
+ * DbCategoryData is a Querydsl bean type
  */
 @Generated("com.mysema.query.codegen.BeanSerializer")
-public class Category {
-
-    private Integer id;
+public class DbCategoryData {
 
     private String name;
 
-    private Integer user;
+    private String user;
 
-    private Long value;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private Float value;
 
     public String getName() {
         return name;
@@ -32,19 +22,19 @@ public class Category {
         this.name = name;
     }
 
-    public Integer getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(Integer user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
-    public Long getValue() {
+    public Float getValue() {
         return value;
     }
 
-    public void setValue(Long value) {
+    public void setValue(Float value) {
         this.value = value;
     }
 
