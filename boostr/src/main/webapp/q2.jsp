@@ -75,10 +75,7 @@ Integer sliderValue = Integer.parseInt(answer1);
 String uuid = (String) request.getParameter("uid");
 
 System.out.println(answer1);
-
-Util util = new Util();
-
-util.postSlider(sliderValue, uuid);
+Util.postSlider(sliderValue, uuid);
 
 
 %>
