@@ -19,11 +19,12 @@ public class UserStore {
 	private final String connectionLocation = "jdbc:mysql://localhost:3306/boostr";
 	private final String connectionUser = "root";
 
-	public User getUser(String uuid) {
+	public User getUser(String uuid) throws SQLException {
+		Connection connection = DriverManager.getConnection( connectionLocation, connectionUser, "" );
 		try {
 			Class.forName( "com.mysql.jdbc.Driver" );
 			QDbCategoryData qcategorydata = new QDbCategoryData( "cd" );
-			MySQLQuery query = new MySQLQuery( DriverManager.getConnection( connectionLocation, connectionUser, "" ) );
+			MySQLQuery query = new MySQLQuery( connection );
 
 			List<DbCategoryData> data = query.from( qcategorydata )
 							   		   		 .where( qcategorydata.user.eq( uuid ) )
@@ -35,10 +36,35 @@ public class UserStore {
 			}
 
 			return new User( uuid, userData );
-		} catch( SQLException | ClassNotFoundException e ) {
+		} catch( ClassNotFoundException e ) {
 			e.printStackTrace();
 		}
-		return null;
+
+		// If we're here, there's no user in the DB so we need to create one
+		DbUser user = new DbUser();
+		user.setUuid( uuid );
+
+		QDbUser quser = new QDbUser( "u" );
+		QDbCategoryData qcategorydata = new QDbCategoryData( "cd" );
+
+		SQLInsertClause insert = new SQLInsertClause( connection, new MySQLTemplates(), quser );
+		insert.populate( user ).execute();
+
+		Map<Category, Float> userPrefs = new HashMap<>();
+
+		for( Category c : Category.values() ) {
+			userPrefs.put( c, 0.0f );
+
+			DbCategoryData data = new DbCategoryData();
+			data.setName( c.name() );
+			data.setUser( uuid );
+			data.setValue( 0.0f );
+
+			SQLInsertClause insertData = new SQLInsertClause( connection, new MySQLTemplates(), qcategorydata );
+			insertData.populate( data ).execute();
+		}
+
+		return new User( uuid, userPrefs );
 	}
 
 	public void updateUserPrefs( String uuid, Map<Category, Float> newPrefs ) {

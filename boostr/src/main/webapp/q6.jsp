@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.intuit.honeybadgers.boostr.server.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,6 +59,22 @@ $( document ).ready(function() {
 
 </script>
 </head>
+<%
+
+String answer1 = (String)request.getParameter("val");
+
+Integer sliderValue = Integer.parseInt(answer1);
+
+String uuid = (String) request.getParameter("uid");
+
+System.out.println(answer1);
+
+Util util = new Util();
+
+util.postSlider(sliderValue, uuid);
+
+
+%>
 <body>
 <div class="container">
     <div class="col-md-8 col-md-offset-2 clearfix">

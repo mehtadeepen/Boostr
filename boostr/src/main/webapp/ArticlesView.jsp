@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+         <%@ page import="com.intuit.honeybadgers.boostr.server.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,23 @@ function loadPersonalizedArticles() {
 $(document).ready(loadPersonalizedArticles);
     </script>
 </head>
+
+<%
+
+String answer1 = (String)request.getParameter("val");
+
+Integer sliderValue = Integer.parseInt(answer1);
+
+String uuid = (String) request.getParameter("uid");
+
+System.out.println(answer1);
+
+Util util = new Util();
+
+util.postSlider(sliderValue, uuid);
+
+
+%>
 <body >
 <!-- Some sort of header maybe -->
 
