@@ -11,6 +11,7 @@ import com.intuit.honeybadgers.boostr.db.tables.*;
 import com.intuit.honeybadgers.boostr.models.Category;
 import com.intuit.honeybadgers.boostr.models.User;
 import com.mysema.query.sql.MySQLTemplates;
+import com.mysema.query.sql.dml.SQLInsertClause;
 import com.mysema.query.sql.dml.SQLUpdateClause;
 import com.mysema.query.sql.mysql.MySQLQuery;
 
@@ -53,12 +54,19 @@ public class UserStore {
 											   .limit( 1 )
 											   .uniqueResult( qcategorydata );
 
-				if( )
+				if( oldPrefs == null ) {
+					SQLInsertClause insert = new SQLInsertClause( connection, new MySQLTemplates(), qcategorydata );
+					insert.set( qcategorydata.value, newPrefs.get( c ) )
+						  .set( qcategorydata.name, c.name() )
+ 						  .set( qcategorydata.user, uuid )
+						  .execute();
+				} else {
+					SQLUpdateClause update = new SQLUpdateClause( connection, new MySQLTemplates(), qcategorydata );
 
-				SQLUpdateClause update = new SQLUpdateClause( connection, new MySQLTemplates(), qcategorydata );
-				update.where( qcategorydata.user.eq( uuid ).and( qcategorydata.name.eq( c.name() ) ) )
-					  .set( qcategorydata.value, oldPrefs.getValue() + newPrefs.get( c ) )
-					  .execute();
+					update.where( qcategorydata.user.eq( uuid ).and( qcategorydata.name.eq( c.name() ) ) )
+						  .set( qcategorydata.value, oldPrefs.getValue() + newPrefs.get( c ) )
+						  .execute();
+				}
 			}
 		} catch( SQLException | ClassNotFoundException e ) {
 			e.printStackTrace();
