@@ -9,6 +9,7 @@ import com.sun.jersey.api.view.Viewable;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -16,6 +17,7 @@ import java.util.*;
  * @author ddubois
  */
 @Path( "/" )
+@XmlRootElement
 public class ServerMain {
     private ArticleStore articleStore = new ArticleStore();
     private UserStore userStore = new UserStore();

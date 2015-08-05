@@ -2,6 +2,7 @@ package com.intuit.honeybadgers.boostr.server;
 
 import com.intuit.honeybadgers.boostr.models.Category;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 import javax.ws.rs.core.MediaType;
@@ -21,7 +22,7 @@ public class Util {
         ret.put(Category.Retirement, normalized);
         ret.put(Category.Loans, -normalized);
         Client tmp = Client.create();
-        WebResource res = tmp.resource("http://localhost:8080/boostr/server/answer?uuid=" + uuid);
-        res.type( MediaType.APPLICATION_JSON_TYPE).post( new AnswerRequest( ret ) );
+        WebResource res = tmp.resource( "http://localhost:8080/boostr/server/answer?uuid=" + uuid );
+        ClientResponse response = res.type( MediaType.APPLICATION_JSON_TYPE ).post( ClientResponse.class, new AnswerRequest( ret ) );
     }
 }
