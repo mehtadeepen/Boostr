@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `db_user` (
 
 CREATE TABLE IF NOT EXISTS `db_category_data` (
   `name`      VARCHAR(45)     NOT NULL,
-  `value`     DOUBLE          NOT NULL,
+  `value`     FLOAT           NOT NULL,
   `user`      VARCHAR(30)     NOT NULL,
   PRIMARY KEY (`name`, `user`),
   CONSTRAINT `fk_user`
