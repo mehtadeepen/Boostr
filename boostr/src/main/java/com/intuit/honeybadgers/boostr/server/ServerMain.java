@@ -28,17 +28,11 @@ public class ServerMain {
     @GET
     @Path( "articles" )
     @Produces( MediaType.APPLICATION_JSON )
-    public Viewable getArticles( @QueryParam( "uuid" ) String uuid ) {
-        Map<String, Object> model = new HashMap<>();
-        Map<String, List<Article>> allArticles = new HashMap<>();
+    public List<Article> getArticles( @QueryParam( "uuid" ) String uuid, @QueryParam( "category" ) Category category ) {
+        if( category != null ) {
+            // Return all articles of the specified category
 
-        if( uuid == null ) {
-            // Return all articles of all categories
-
-            for( Category c : Category.values() ) {
-                allArticles.put( c.name(), articleStore.getArticlesByCategory( c ) );
-            }
-
+            return articleStore.getArticlesByCategory( category );
         } else {
             // Return articles for a specific user
             User user = userStore.getUser( uuid );
@@ -53,11 +47,8 @@ public class ServerMain {
                 articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
             }
 
-            allArticles.put( "Just for You", articles );
+            return articles;
         }
-
-        model.put( "articles", allArticles );
-        return new Viewable( "/ArticlesView", model );
     }
 
     @POST
