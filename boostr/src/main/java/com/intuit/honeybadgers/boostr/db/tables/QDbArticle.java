@@ -19,6 +19,8 @@ public class QDbArticle extends com.mysema.query.sql.RelationalPathBase<DbArticl
 
     public static final QDbArticle dbArticle = new QDbArticle("db_article");
 
+    public final StringPath author = createString("author");
+
     public final StringPath category = createString("category");
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);

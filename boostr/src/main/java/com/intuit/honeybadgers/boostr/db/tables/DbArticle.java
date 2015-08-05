@@ -8,11 +8,21 @@ import javax.annotation.Generated;
 @Generated("com.mysema.query.codegen.BeanSerializer")
 public class DbArticle {
 
+    private String author;
+
     private String category;
 
     private Integer id;
 
     private String url;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public String getCategory() {
         return category;
