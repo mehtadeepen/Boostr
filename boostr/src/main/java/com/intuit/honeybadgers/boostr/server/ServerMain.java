@@ -20,10 +20,9 @@ public class ServerMain {
     private UserStore userStore = new UserStore();
     
     @GET
-    @Path( "indexTest" )
-    @Produces( "text/html" )
-    public Viewable basic() {
-        return new Viewable( "/ArticlesView" );
+    @Produces( MediaType.TEXT_PLAIN )
+    public String basic() {
+        return "Hello World";
     }
 
     @GET
