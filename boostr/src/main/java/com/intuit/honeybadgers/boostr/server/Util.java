@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class Util {
     public static void postSlider (int sliderValue, String uuid) {
-        float normalized = (sliderValue - 50)/50;
+        float normalized = ((float)(sliderValue - 50))/50f;
         Map<Category, Float> ret = new HashMap<Category,Float>();
         ret.put(Category.CreditCards, -normalized);
         ret.put(Category.Savings, -normalized);
