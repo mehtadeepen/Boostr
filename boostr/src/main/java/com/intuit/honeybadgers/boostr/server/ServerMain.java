@@ -30,28 +30,25 @@ public class ServerMain {
     @GET
     @Path( "articles" )
     @Produces( MediaType.APPLICATION_JSON )
-    public List<Article> getArticles( @QueryParam( "uuid" ) String uuid ) {
-        // Return articles for a specific user
-        User user = userStore.getUser( uuid );
-        Map<Category, Double> userPrefs = user.getInterests();
+    public List<Article> getArticles( @QueryParam( "uuid" ) String uuid, @QueryParam( "category" ) Category category ) {
+        if( category != null ) {
+            // Return all articles of a given category
+            return articleStore.getArticlesByCategory( category );
+        } else {
+            // Return articles for a specific user
+            User user = userStore.getUser( uuid );
+            Map<Category, Double> userPrefs = user.getInterests();
 
-        List<Category> sortedPrefs = new ArrayList<>();
-        sortedPrefs = Ordering.natural().onResultOf( Functions.forMap( userPrefs ) ).sortedCopy( sortedPrefs );
+            List<Category> sortedPrefs = new ArrayList<>();
+            sortedPrefs = Ordering.natural().onResultOf( Functions.forMap( userPrefs ) ).sortedCopy( sortedPrefs );
 
-        List<Article> articles = new ArrayList<>();
+            List<Article> articles = new ArrayList<>();
 
-        for( int i = 0; i < 2; i++ ) {
-            articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
+            for( int i = 0; i < 2; i++ ) {
+                articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
+            }
+
+            return articles;
         }
-
-        return articles;
-    }
-
-    @GET
-    @Path( "articles" )
-    @Produces( MediaType.APPLICATION_JSON )
-    public List<Article> getArticles( @QueryParam( "category" ) Category category ) {
-        // Return all articles of a given category
-        return articleStore.getArticlesByCategory( category );
     }
 }
