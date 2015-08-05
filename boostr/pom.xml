@@ -10,6 +10,9 @@
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <querydsl.version>3.2.3</querydsl.version>
+        <derby.version>10.10.1.1</derby.version>
+        <mysql.driver.version>5.1.6</mysql.driver.version>
     </properties>
     <dependencies>
         <dependency>
@@ -58,24 +61,20 @@
             <artifactId>guava</artifactId>
             <version>18.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-sql</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.30</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>boostr</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/${project.build.finalName}</path>
-                    <update>true</update>
-                    <url>http://localhost:8080/manager/text</url>
-                    <username>admin</username>
-                    <password>password</password>
-                </configuration>
-            </plugin>
-        </plugins>
-        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -88,7 +87,55 @@
                         <fork>true</fork>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>com.mysema.querydsl</groupId>
+                    <artifactId>querydsl-maven-plugin</artifactId>
+                    <version>${querydsl.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>export</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <jdbcDriver>com.mysql.jdbc.Driver</jdbcDriver>
+                        <jdbcUrl>jdbc:mysql://localhost:3306/boostr</jdbcUrl>
+                        <jdbcUser>root</jdbcUser>
+                        <jdbcPassword></jdbcPassword>
+                        <packageName>com.intuit.honeybadgers.boostr.db.tables</packageName>
+                        <targetFolder>${project.basedir}/src/main/java</targetFolder>
+                        <exportBeans>true</exportBeans>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.mysema.querydsl</groupId>
+                            <artifactId>querydsl-sql</artifactId>
+                            <version>${querydsl.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.mysema.querydsl</groupId>
+                            <artifactId>querydsl-sql-codegen</artifactId>
+                            <version>${querydsl.version}</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>${mysql.driver.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.derby</groupId>
+                            <artifactId>derbyclient</artifactId>
+                            <version>${derby.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                            <version>1.7.12</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
             </plugins>
-        </pluginManagement>
     </build>
 </project>

@@ -10,6 +10,12 @@ public class Article {
 	/** What category this falls under */
 	Category category;
 
+	public Article( URI newLocation, String newAuthor, Category newCategory ) {
+		location = newLocation;
+		author = newAuthor;
+		category = newCategory;
+	}
+
 	public Category getCategory() {
 		return  category;
 	}

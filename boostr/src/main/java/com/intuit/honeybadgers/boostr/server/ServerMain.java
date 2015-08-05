@@ -6,10 +6,7 @@ import com.intuit.honeybadgers.boostr.models.Article;
 import com.intuit.honeybadgers.boostr.models.Category;
 import com.intuit.honeybadgers.boostr.models.User;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.*;
 
@@ -37,7 +34,7 @@ public class ServerMain {
         } else {
             // Return articles for a specific user
             User user = userStore.getUser( uuid );
-            Map<Category, Double> userPrefs = user.getInterests();
+            Map<Category, Float> userPrefs = user.getInterests();
 
             List<Category> sortedPrefs = new ArrayList<>();
             sortedPrefs = Ordering.natural().onResultOf( Functions.forMap( userPrefs ) ).sortedCopy( sortedPrefs );
@@ -50,5 +47,12 @@ public class ServerMain {
 
             return articles;
         }
+    }
+
+    @POST
+    @Path( "answer" )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public void setAnswers( @QueryParam( "uuid" ) String uuid, Map<Category, Float> responses ) {
+        userStore.updateUserPrefs( uuid, responses );
     }
 }
