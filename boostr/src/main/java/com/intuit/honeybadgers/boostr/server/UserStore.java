@@ -33,7 +33,6 @@ public class UserStore {
 			}
 
 			return new User( uuid, userData );
-
 		} catch( SQLException e ) {
 			e.printStackTrace();
 		}
