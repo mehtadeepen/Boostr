@@ -4,6 +4,7 @@ import com.intuit.honeybadgers.boostr.models.Category;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
+import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class Util {
         ret.put(Category.Retirement, normalized);
         ret.put(Category.Loans, -normalized);
         Client tmp = Client.create();
-        WebResource res = tmp.resource("/boostr/server/answer?uuid=" + uuid);
-        res.post(ret);
+        WebResource res = tmp.resource("http://localhost:8080/boostr/server/answer?uuid=" + uuid);
+        res.type( MediaType.APPLICATION_JSON_TYPE).post( new AnswerRequest( ret ) );
     }
 }

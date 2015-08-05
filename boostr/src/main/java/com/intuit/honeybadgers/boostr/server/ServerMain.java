@@ -9,6 +9,7 @@ import com.sun.jersey.api.view.Viewable;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -35,30 +36,37 @@ public class ServerMain {
             return articleStore.getArticlesByCategory( category );
         } else {
             // Return articles for a specific user
-            User user = userStore.getUser( uuid );
-            Map<Category, Float> userPrefs = user.getInterests();
+            User user = null;
+            try {
+                user = userStore.getUser( uuid );
+                Map<Category, Float> userPrefs = user.getInterests();
 
-            List<Category> sortedPrefs = new ArrayList<>();
-            sortedPrefs = Ordering.natural().onResultOf( Functions.forMap( userPrefs ) ).sortedCopy( sortedPrefs );
+                List<Category> sortedPrefs = new ArrayList<>();
+                sortedPrefs = Ordering.natural().onResultOf( Functions.forMap( userPrefs ) ).sortedCopy( sortedPrefs );
 
-            List<Article> articles = new ArrayList<>();
+                List<Article> articles = new ArrayList<>();
 
-            for( int i = 0; i < Math.min( 3, sortedPrefs.size() ); i++ ) {
-                articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
+                for( int i = 0; i < Math.min( 3, sortedPrefs.size() ); i++ ) {
+                    articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
+                }
+
+                if( articles.size() == 0 ) {
+                    articles.addAll( articleStore.getArticlesByCategory( Category.Interest ) );
+                }
+
+                return articles;
+            } catch( SQLException e ) {
+                e.printStackTrace();
             }
-
-            if( articles.size() == 0 ) {
-                articles.addAll( articleStore.getArticlesByCategory( Category.Interest ) );
-            }
-
-            return articles;
         }
+
+        return null;
     }
 
     @POST
     @Path( "answer" )
     @Consumes( MediaType.APPLICATION_JSON )
-    public void setAnswers( @QueryParam( "uuid" ) String uuid, Map<Category, Float> responses ) {
-        userStore.updateUserPrefs( uuid, responses );
+    public void setAnswers( @QueryParam( "uuid" ) String uuid, AnswerRequest responses ) {
+        userStore.updateUserPrefs( uuid, responses.getData() );
     }
 }
