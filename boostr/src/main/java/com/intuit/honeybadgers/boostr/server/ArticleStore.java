@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * @author ddubois
  */
+
 public class ArticleStore {
     private final String connectionLocation = "jdbc:mysql://localhost:3306/boostr";
     private final String connectionUser = "root";

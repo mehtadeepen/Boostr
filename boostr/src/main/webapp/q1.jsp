@@ -25,14 +25,20 @@
              margin-right : 10px;
              margin-top: 20px;}
 </style>
+  <script src="js/cookies.js"></script>
 <script type="text/javascript">
 
 function setValues() {
 	
 	var sliderValue = $('#slider').slider('value');
 	$('#val').val(sliderValue);
+	var cookie = docCookies.getItem( "user_id" );
+	$('#uid').val(cookie);
 	
 	alert($('#val').val());
+	
+	
+	
 	
 	$('#q1').submit();
 	
@@ -87,7 +93,7 @@ $( document ).ready(function() {
     <form id="q1" name="q1" action="q2.jsp" method="post">
     <input type="hidden" name="uid" id="uid" value=""></input>
     <input type="hidden" name="val" id="val" value=""></input>
-    <input type="hidden" name="que1" id="que1" value=""></input>
+    <input type="hidden" name="que1" id="que1" value="que1"></input>
     <br>
     <input type="button" value="Next" class="btn btn-warning" onclick="setValues();"></input>
     </form>
