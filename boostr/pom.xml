@@ -101,8 +101,8 @@
                     <configuration>
                         <jdbcDriver>com.mysql.jdbc.Driver</jdbcDriver>
                         <jdbcUrl>jdbc:mysql://localhost:3306/boostr</jdbcUrl>
-                        <jdbcUser>root</jdbcUser>
-                        <jdbcPassword></jdbcPassword>
+                        <jdbcUser>admin5RMYsWK</jdbcUser>
+                        <jdbcPassword>s5x8_1nE9qFc</jdbcPassword>
                         <packageName>com.intuit.honeybadgers.boostr.db.tables</packageName>
                         <targetFolder>${project.basedir}/src/main/java</targetFolder>
                         <exportBeans>true</exportBeans>

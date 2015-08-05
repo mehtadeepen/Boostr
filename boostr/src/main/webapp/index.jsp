@@ -50,11 +50,7 @@
            <img src='/boostr/img/logo.png'/>
         </div>
         <div class='text-center row'>
-<<<<<<< Updated upstream
-            <a class='btn btn-default' href='/boostr/q1.jsp' role='button' id='start_btn'> Get Started </a>
-=======
             <a class='btn btn-default' href='q1.jsp' role='button' id='start_btn'> Get Started </a>
->>>>>>> Stashed changes
         </div>
     </div>
     <script type='text/javascript'>
