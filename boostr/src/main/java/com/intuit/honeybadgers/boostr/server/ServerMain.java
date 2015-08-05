@@ -5,6 +5,7 @@ import com.google.common.collect.Ordering;
 import com.intuit.honeybadgers.boostr.models.Article;
 import com.intuit.honeybadgers.boostr.models.Category;
 import com.intuit.honeybadgers.boostr.models.User;
+import com.sun.jersey.api.view.Viewable;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -19,18 +20,26 @@ public class ServerMain {
     private UserStore userStore = new UserStore();
     
     @GET
-    @Produces( MediaType.TEXT_PLAIN )
-    public String basic() {
-        return "Hello World";
+    @Path( "indexTest" )
+    @Produces( "text/html" )
+    public Viewable basic() {
+        return new Viewable( "/ArticlesView" );
     }
 
     @GET
     @Path( "articles" )
     @Produces( MediaType.APPLICATION_JSON )
-    public List<Article> getArticles( @QueryParam( "uuid" ) String uuid, @QueryParam( "category" ) Category category ) {
-        if( category != null ) {
-            // Return all articles of a given category
-            return articleStore.getArticlesByCategory( category );
+    public Viewable getArticles( @QueryParam( "uuid" ) String uuid ) {
+        Map<String, Object> model = new HashMap<>();
+        Map<String, List<Article>> allArticles = new HashMap<>();
+
+        if( uuid == null ) {
+            // Return all articles of all categories
+
+            for( Category c : Category.values() ) {
+                allArticles.put( c.name(), articleStore.getArticlesByCategory( c ) );
+            }
+
         } else {
             // Return articles for a specific user
             User user = userStore.getUser( uuid );
@@ -45,8 +54,11 @@ public class ServerMain {
                 articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
             }
 
-            return articles;
+            allArticles.put( "Just for You", articles );
         }
+
+        model.put( "articles", allArticles );
+        return new Viewable( "/ArticlesView", model );
     }
 
     @POST

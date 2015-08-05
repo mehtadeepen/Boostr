@@ -19,4 +19,12 @@ public class Article {
 	public Category getCategory() {
 		return  category;
 	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public URI getLocation() {
+		return location;
+	}
 }
