@@ -5,6 +5,7 @@ import com.google.common.collect.Ordering;
 import com.intuit.honeybadgers.boostr.models.Article;
 import com.intuit.honeybadgers.boostr.models.Category;
 import com.intuit.honeybadgers.boostr.models.User;
+import com.sun.jersey.api.view.Viewable;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -29,7 +30,8 @@ public class ServerMain {
     @Produces( MediaType.APPLICATION_JSON )
     public List<Article> getArticles( @QueryParam( "uuid" ) String uuid, @QueryParam( "category" ) Category category ) {
         if( category != null ) {
-            // Return all articles of a given category
+            // Return all articles of the specified category
+
             return articleStore.getArticlesByCategory( category );
         } else {
             // Return articles for a specific user
@@ -41,8 +43,12 @@ public class ServerMain {
 
             List<Article> articles = new ArrayList<>();
 
-            for( int i = 0; i < 2; i++ ) {
+            for( int i = 0; i < Math.min( 3, sortedPrefs.size() ); i++ ) {
                 articles.addAll( articleStore.getArticlesByCategory( sortedPrefs.get( i ) ) );
+            }
+
+            if( articles.size() == 0 ) {
+                articles.addAll( articleStore.getArticlesByCategory( Category.Interest ) );
             }
 
             return articles;

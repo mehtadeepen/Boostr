@@ -17,13 +17,14 @@ import java.util.List;
  * @author ddubois
  */
 public class ArticleStore {
-    private final String connectionLocation = "jdbc:sql://localhost:3306/boostr";
+    private final String connectionLocation = "jdbc:mysql://localhost:3306/boostr";
     private final String connectionUser = "root";
 
     private List<Article> allArticles;
 
     public List<Article> getArticlesByCategory( Category majorCategory ) {
         try {
+            Class.forName( "com.mysql.jdbc.Driver" );
             MySQLQuery query = new MySQLQuery( DriverManager.getConnection( connectionLocation, connectionUser, "" ) );
             QDbArticle qarticle = new QDbArticle( "a" );
 
@@ -34,14 +35,11 @@ public class ArticleStore {
             List<Article> returnedArticles = new ArrayList<>();
 
             for( DbArticle a : dbArticles ) {
-                returnedArticles.add( new Article( new URI( a.getUrl() ), a.getAuthor(), Category.valueOf( a.getCategory() ) ) );
+                returnedArticles.add( new Article( new URI( a.getUrl() ), a.getAuthor(), Category.valueOf( a.getCategory() ), a.getTitle() ) );
             }
 
             return returnedArticles;
-        } catch( SQLException e ) {
-            e.printStackTrace();
-            return null;
-        } catch( URISyntaxException e ) {
+        } catch( SQLException | URISyntaxException | ClassNotFoundException e ) {
             e.printStackTrace();
         }
 
