@@ -26,6 +26,7 @@
              margin-right : 10px;
              margin-top: 20px;}
 </style>
+  <script src="js/cookies.js"></script>
 <script type="text/javascript">
 
 function setValues() {
@@ -36,7 +37,7 @@ function setValues() {
 	alert($('#val').val());
 	var cookie = docCookies.getItem( "user_id" );
 	$('#uid').val(cookie);
-	
+	alert(cookie);
 	
 	$('#q2').submit();
 	

@@ -26,6 +26,7 @@
              margin-right : 10px;
              margin-top: 20px;}
 </style>
+  <script src="js/cookies.js"></script>
 <script type="text/javascript">
 
 function setValues() {
