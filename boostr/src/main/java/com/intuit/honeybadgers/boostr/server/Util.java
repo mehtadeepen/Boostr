@@ -21,6 +21,7 @@ public class Util {
         ret.put(Category.Interest, normalized);
         ret.put(Category.Retirement, normalized);
         ret.put(Category.Loans, -normalized);
+        System.out.println( "Values in Util.postSlider: " +ret +" Normalized: " +normalized );
         Client tmp = Client.create();
         WebResource res = tmp.resource( "http://localhost:8080/boostr/server/answer?uuid=" + uuid );
         ClientResponse response = res.type( MediaType.APPLICATION_JSON_TYPE ).post( ClientResponse.class, new AnswerRequest( ret ) );

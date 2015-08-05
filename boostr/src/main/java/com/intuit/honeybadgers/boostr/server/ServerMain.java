@@ -69,6 +69,7 @@ public class ServerMain {
     @Path( "answer" )
     @Consumes( MediaType.APPLICATION_JSON )
     public void setAnswers( @QueryParam( "uuid" ) String uuid, AnswerRequest responses ) {
+        System.out.println( "Answers for " +uuid +": " +responses.getData() );
         userStore.updateUserPrefs( uuid, responses.getData() );
     }
 }
