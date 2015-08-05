@@ -6,10 +6,7 @@ import com.intuit.honeybadgers.boostr.models.Article;
 import com.intuit.honeybadgers.boostr.models.Category;
 import com.intuit.honeybadgers.boostr.models.User;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.*;
 
@@ -50,5 +47,12 @@ public class ServerMain {
 
             return articles;
         }
+    }
+
+    @POST
+    @Path( "answer" )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public void setAnswers( @QueryParam( "uuid" ) String uuid, Map<Category, Double> responses ) {
+        //userStore.getUser( uuid ).getInterests()
     }
 }

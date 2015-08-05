@@ -1,5 +1,5 @@
 package com.intuit.honeybadgers.boostr.models;
 
 public enum Category {
-	Interest, Loans, CreditCards, Savings, Retirement
+	Interest, Loans, CreditCards, Savings, Retirement, Help
 }
