@@ -34,6 +34,7 @@ function setValues() {
 	$('#val').val(sliderValue);
 	
 	alert($('#val').val());
+	var cookie = docCookies.getItem( "user_id" );
 	$('#uid').val(cookie);
 	
 	$('#q8').submit();
