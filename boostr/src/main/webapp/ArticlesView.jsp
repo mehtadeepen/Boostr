@@ -13,13 +13,13 @@ function fillArticleList( data, status ) {
     console.log(data)
     var articleList = document.getElementById( "articlesList" );
     for( var i=0; i < data.length; i++ ) {
-        $('#articleList').append($('<li></li>'));
-        
+        article = $('<div class="row"> <a href=' + data[i].location + '>' + data[i].title + '</a><br>' +
+                    'by: <i>' + data[i].author + '</div>');
+        $('#articlesList').append(article);
     }
 }
 
 function loadPersonalizedArticles() {
-    console.log("TEST");
     var cookie = docCookies.getItem( "user_id" );
     $.get( "server/articles?uuid=" +cookie, fillArticleList );
 }
@@ -31,18 +31,22 @@ $(document).ready(loadPersonalizedArticles);
 <!-- Some sort of header maybe -->
 
 <div class="jumbotron">
-<div class="container">
-  <div class="row">
-    </div>
+    <div class='row'>
     <div class="col-md-2">
       <!-- padding -->
     </div>
 
     <div class="col-md-8" id="suggestedArticles">
       <h2>Suggested for you</h2>
-      <ul id="articlesList">
-      </ul>
     </div>
+    </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div id="articlesList"></div>
+    <div class='row text-center'>
+        <a class='btn btn-default' id='swith_btn' href='/boostr/CategoryList'> Browse by Category </a>
+    </div>    
   </div>
 </div>
 </div>
