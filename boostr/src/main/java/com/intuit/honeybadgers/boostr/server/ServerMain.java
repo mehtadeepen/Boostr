@@ -8,6 +8,7 @@ import com.intuit.honeybadgers.boostr.models.User;
 import com.sun.jersey.api.view.Viewable;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.SQLException;
@@ -68,8 +69,9 @@ public class ServerMain {
     @POST
     @Path( "answer" )
     @Consumes( MediaType.APPLICATION_JSON )
-    public void setAnswers( @QueryParam( "uuid" ) String uuid, AnswerRequest responses ) {
-        System.out.println( "Answers for " +uuid +": " +responses.getData() );
-        userStore.updateUserPrefs( uuid, responses.getData() );
+    public void setAnswers( String responses ) {
+        //System.out.println( "Answers for " +responses.getUuid() +": " +responses.getData() );
+        //userStore.updateUserPrefs( responses.getUuid(), responses.getData() );
+        System.out.println( "Raw JSON: \n" +responses );
     }
 }

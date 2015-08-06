@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS `db_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `db_user` (
-  `uuid`      VARCHAR(30)     NOT NULL,
+  `uuid`      VARCHAR(61)     NOT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `db_category_data` (
   `name`      VARCHAR(45)     NOT NULL,
   `value`     FLOAT           NOT NULL,
-  `user`      VARCHAR(30)     NOT NULL,
+  `user`      VARCHAR(61)     NOT NULL,
   PRIMARY KEY (`name`, `user`),
   CONSTRAINT `fk_user`
   FOREIGN KEY (`user`)
