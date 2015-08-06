@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.intuit.honeybadgers.boostr.server.*" %>
+<%@ page import="com.intuit.honeybadgers.boostr.models.Category" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -77,8 +79,8 @@ Integer sliderValue = Integer.parseInt(answer1);
 String uuid = (String) request.getParameter("uid");
 
 System.out.println(answer1);
-Util.postSlider(sliderValue, uuid);
-
+Map<Category, Float> tmp = Util.postSlider(sliderValue, uuid);
+ServerMain.setAnswers2(uuid, tmp);
 
 %>
 <body>

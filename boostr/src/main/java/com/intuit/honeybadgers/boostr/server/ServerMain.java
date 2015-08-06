@@ -21,7 +21,7 @@ import java.util.*;
 @XmlRootElement
 public class ServerMain {
     private ArticleStore articleStore = new ArticleStore();
-    private UserStore userStore = new UserStore();
+    private static UserStore userStore = new UserStore();
     
     @GET
     @Produces( MediaType.TEXT_PLAIN )
@@ -66,12 +66,15 @@ public class ServerMain {
         return null;
     }
 
+    public static void setAnswers2(String uuid, Map<Category, Float> responses) {
+        userStore.updateUserPrefs( uuid, responses );
+    }
+
     @POST
     @Path( "answer" )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public void setAnswers( String responses ) {
-        //System.out.println( "Answers for " +responses.getUuid() +": " +responses.getData() );
-        //userStore.updateUserPrefs( responses.getUuid(), responses.getData() );
-        System.out.println( "Raw JSON: \n" +responses );
+    @Consumes( MediaType.APPLICATION_JSON ) 
+    public void setAnswers( @QueryParam( "uuid" ) String uuid, Map <Category, Float> responses ) {
+        System.out.println(responses);
+        userStore.updateUserPrefs( uuid, responses );
     }
 }
