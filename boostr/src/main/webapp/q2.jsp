@@ -36,10 +36,10 @@ function setValues() {
 	var sliderValue = $('#slider').slider('value');
 	$('#val').val(sliderValue);
 	
-	alert($('#val').val());
+	//alert($('#val').val());
 	var cookie = docCookies.getItem( "user_id" );
 	$('#uid').val(cookie);
-	alert(cookie);
+	//alert(cookie);
 	
 	$('#q2').submit();
 	
