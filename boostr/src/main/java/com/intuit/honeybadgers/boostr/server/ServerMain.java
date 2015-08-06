@@ -20,7 +20,7 @@ import java.util.*;
 @XmlRootElement
 public class ServerMain {
     private ArticleStore articleStore = new ArticleStore();
-    private UserStore userStore = new UserStore();
+    private static UserStore userStore = new UserStore();
     
     @GET
     @Produces( MediaType.TEXT_PLAIN )
@@ -65,10 +65,15 @@ public class ServerMain {
         return null;
     }
 
+    public static void setAnswers2(String uuid, Map<Category, Float> responses) {
+        userStore.updateUserPrefs( uuid, responses );
+    }
+
     @POST
     @Path( "answer" )
     @Consumes( MediaType.APPLICATION_JSON )
-    public void setAnswers( @QueryParam( "uuid" ) String uuid, AnswerRequest responses ) {
-        userStore.updateUserPrefs( uuid, responses.getData() );
+    public void setAnswers( @QueryParam( "uuid" ) String uuid,Map <Category, Float> responses ) {
+        System.out.println(responses);
+        userStore.updateUserPrefs( uuid, responses );
     }
 }
