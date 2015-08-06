@@ -80,6 +80,7 @@ String uuid = (String) request.getParameter("uid");
 
 System.out.println(answer1);
 Map<Category, Float> tmp = Util.postSlider(sliderValue, uuid);
+
 ServerMain.setAnswers2(uuid, tmp);
 
 %>
