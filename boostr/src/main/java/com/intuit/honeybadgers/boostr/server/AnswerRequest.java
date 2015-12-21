@@ -21,6 +21,8 @@ public class AnswerRequest {
     AnswerRequest( Map<Category, Float> newData, String newUuid ) {
         data = newData;
         uuid = newUuid;
+        
+        
     }
 
     public Map<Category, Float> getData() {
